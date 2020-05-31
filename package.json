@@ -1,0 +1,30 @@
+{
+  "name": "drag_and_drop",
+  "version": "0.0.1",
+  "description": "Part of a Typescript course on Udemy.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhoumann87/drag_and_drop.git"
+  },
+  "keywords": [
+    "typescript",
+    "javascript",
+    "'web-developemnt'",
+    "html",
+    "css"
+  ],
+  "author": "Michael Houmann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mhoumann87/drag_and_drop/issues"
+  },
+  "homepage": "https://github.com/mhoumann87/drag_and_drop#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
