@@ -31,8 +31,6 @@ function validate(validatableInput: Validatable) {
   }
   return isValid;
 }
-
-
 // decorators
 
 function autobind(
@@ -54,7 +52,6 @@ function autobind(
 // Classes
 
 // Component Base Class
-
 abstract class Component<T extends HTMLElement, U extends HTMLElement> {
   templateElement: HTMLTemplateElement;
   hostElement: T;
@@ -90,32 +87,25 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
   abstract renderContent(): void;
 }
 
+// State Base Class
+type Listener<T> = (items: T[]) => void;
+class State<T> {
+  protected listeners: Listener<T>[] = [];
 
-
-// Project type
-enum ProjectStatus { Active, Finished };
-class Project {
-
-  constructor(
-    public id: string,
-    public title: string,
-    public description: string,
-    public people: number,
-    public status: ProjectStatus
-  ) { }
+  addListener(listenerFunc: Listener<T>) {
+    this.listeners.push(listenerFunc);
+  }
 }
 
 // Project state management
-
-type Listener = (items: Project[]) => void;
-
-class ProjectState {
-  private listeners: Listener[] = [];
+class ProjectState extends State<Project> {
   private projects: Project[] = [];
 
   private static instance: ProjectState;
 
-  private constructor() { }
+  private constructor() {
+    super();
+  }
 
   static getInstance() {
     if (this.instance) {
@@ -123,10 +113,6 @@ class ProjectState {
     }
     this.instance = new ProjectState();
     return this.instance;
-  }
-
-  addListener(listenerFunc: Listener) {
-    this.listeners.push(listenerFunc);
   }
 
   addProject(title: string, description: string, numOfPeople: number) {
@@ -145,6 +131,21 @@ class ProjectState {
 }
 
 const projectState = ProjectState.getInstance();
+
+
+// Project type
+enum ProjectStatus { Active, Finished };
+class Project {
+
+  constructor(
+    public id: string,
+    public title: string,
+    public description: string,
+    public people: number,
+    public status: ProjectStatus
+  ) { }
+}
+
 
 // Project input class
 class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
